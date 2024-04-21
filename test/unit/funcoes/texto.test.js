@@ -1,30 +1,24 @@
-const {existeTexto} = require('./../../../src/funcoes/texto');
+const { existeTexto } = require("../../../src/funcoes/texto");
 const assert = require("node:assert");
 
+describe("Texto", () => {
+    describe("#existeTexto", () => {
+        const vetor = [ "Selenium", "Cypress" ];
+        
+        it("Validar quando existe um texto", () => {
+            // Arrange
+            const textoEsperado = "Selenium";
 
-describe("Testes do arquivo de funcoes texto.js", () => {
+            // Act 
+            const encontrouOTexto = existeTexto(vetor, textoEsperado);
 
-    describe("#existeText", () => {
-        const vetor = ['Igor', 'Fernandes', 'Cordeiro'];
-
-        it("Validar que é possível encontrar um valor no vetor", ()=>{
-            const resultado = existeTexto(vetor, "Igor");
-            assert.equal(resultado, true);
-            assert.ok(resultado);
+            // Assert
+            assert.ok(encontrouOTexto)
         });
 
-        it("Validar que NÃO é possível encontrar um valor no vetor", () => {
-            const resultado = existeTexto(vetor, "Igorr");
-            assert.equal(resultado, false, `Não deveria ser possível encontarar um valor no vetor`);
-            assert.ok(!resultado);
-        });
+        it("Validar que não é possível encontrar um valor no vetor", () => {
+            const encontrouOTexto = existeTexto(vetor, "Seleniun");
+            assert.equal(encontrouOTexto, false, `O valor Seleniun foi encontrado mas não deveria estar no ${vetor}`);
+        })
     });
-
-});
-
-
-
-/*
-Criar dois testes. Um para validar a função existeTexto, encontrando um texto em um vetor; 
-Outro teste não encontrando um texto em um vetor
-*/
+})
